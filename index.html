@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Digital | Angel Daniel Baez - 100775932</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fuentes Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                        accent: '#06b6d4',
+                        dark: '#1e1b4b',
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        /* Gradiente animado de fondo */
+        .gradient-bg {
+            background: linear-gradient(-45deg, #1e1b4b, #312e81, #4338ca, #6366f1);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Efecto de brillo en tarjetas */
+        .card-glow:hover {
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+        }
+        
+        /* Animación de flotación */
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Efecto de texto con gradiente */
+        .text-gradient {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Línea decorativa animada */
+        .line-animation {
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1, #06b6d4);
+            transition: width 0.5s ease;
+        }
+        
+        .group:hover .line-animation {
+            width: 100%;
+        }
+        
+        /* Partículas de fondo */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: rise 10s infinite ease-in;
+        }
+        
+        @keyframes rise {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-gray-100 font-poppins">
+
+    <!-- ==== Barra de Navegación ==== -->
+    <nav class="bg-slate-900/95 backdrop-blur-md shadow-lg fixed w-full z-50 border-b border-slate-700/50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="#inicio" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">A</span>
+                    </div>
+                    <span class="text-xl font-bold text-gradient">Angel Daniel</span>
+                </a>
+
+                <!-- Menú Principal (Desktop) -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="text-gray-300 hover:text-primary transition duration-300 flex items-center gap-2">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
+                    <a href="#evidencias" class="text-gray-300 hover:text-primary transition duration-300 flex items-center gap-2">
+                        <i class="fas fa-folder-open"></i> Evidencias
+                    </a>
+                    <a href="#sobre-mi" class="text-gray-300 hover:text-primary transition duration-300 flex items-center gap-2">
+                        <i class="fas fa-user"></i> Sobre Mí
+                    </a>
+                    <a href="#contacto" class="text-gray-300 hover:text-primary transition duration-300 flex items-center gap-2">
+                        <i class="fas fa-envelope"></i> Contacto
+                    </a>
+                </div>
+
+                <!-- Botón de Menú Móvil -->
+                <div class="md:hidden flex items-center">
+                    <button id="menu-button" class="text-gray-300 hover:text-primary focus:outline-none p-2">
+                        <svg id="menu-open-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                        <svg id="menu-close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Menú Móvil -->
+        <div id="mobile-menu" class="md:hidden hidden bg-slate-800/95 backdrop-blur-md py-4 border-t border-slate-700">
+            <a href="#inicio" class="block px-6 py-3 text-gray-300 hover:text-primary hover:bg-slate-700/50 transition"><i class="fas fa-home mr-3"></i>Inicio</a>
+            <a href="#evidencias" class="block px-6 py-3 text-gray-300 hover:text-primary hover:bg-slate-700/50 transition"><i class="fas fa-folder-open mr-3"></i>Evidencias</a>
+            <a href="#sobre-mi" class="block px-6 py-3 text-gray-300 hover:text-primary hover:bg-slate-700/50 transition"><i class="fas fa-user mr-3"></i>Sobre Mí</a>
+            <a href="#contacto" class="block px-6 py-3 text-gray-300 hover:text-primary hover:bg-slate-700/50 transition"><i class="fas fa-envelope mr-3"></i>Contacto</a>
+        </div>
+    </nav>
+
+    <!-- ==== 1. Página Principal (Sección "Inicio") ==== -->
+    <section id="inicio" class="gradient-bg min-h-screen flex items-center relative overflow-hidden">
+        <!-- Partículas decorativas -->
+        <div class="particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 5s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 2.5s;"></div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto px-4 py-20 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- Imagen de Perfil con efecto -->
+                <div class="flex-shrink-0 float-animation">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-full blur-2xl opacity-50 scale-110"></div>
+                        <img src="img/Generated Image September 02, 2025 - 11_40PM (2).jpeg" 
+                             alt="Angel Daniel Baez" 
+                             class="w-56 h-56 lg:w-72 lg:h-72 rounded-full shadow-2xl relative z-10 border-4 border-white/20 object-cover">
+                    </div>
+                </div>
+                
+                <!-- Datos Personales y Presentación -->
+                <div class="text-center lg:text-left">
+                    <p class="text-accent font-medium mb-2 tracking-wider uppercase">¡Bienvenido a mi portafolio!</p>
+                    <h1 class="text-5xl lg:text-6xl font-bold text-white mb-4">
+                        Hola, soy <span class="text-gradient">Angel Daniel Baez</span>
+                    </h1>
+                    <div class="flex items-center justify-center lg:justify-start gap-3 mb-6">
+                        <span class="bg-primary/30 text-primary-200 px-4 py-2 rounded-full text-sm font-medium border border-primary/50">
+                            <i class="fas fa-id-card mr-2"></i>Matrícula: 100775932
+                        </span>
+                        <span class="bg-accent/30 text-cyan-200 px-4 py-2 rounded-full text-sm font-medium border border-accent/50">
+                            <i class="fas fa-laptop-code mr-2"></i>Tech Enthusiast
+                        </span>
+                    </div>
+                    <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mb-8">
+                        Soy un <strong class="text-white">aficionado de la informática</strong> con una curiosidad insaciable por el mundo tecnológico. 
+                        Me apasiona <strong class="text-accent">conocer, aprender y experimentar</strong> con todo lo relacionado a la tecnología, 
+                        desde sistemas operativos hasta programación. Siempre estoy buscando nuevos desafíos que me permitan 
+                        expandir mis conocimientos y desarrollar habilidades que me preparen para el futuro digital.
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                        <a href="#evidencias" class="bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-primary/50 flex items-center gap-2">
+                            <i class="fas fa-folder-open"></i> Ver Evidencias
+                        </a>
+                        <a href="#contacto" class="bg-transparent border-2 border-white/30 text-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 flex items-center gap-2">
+                            <i class="fas fa-paper-plane"></i> Contactar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Indicador de scroll -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <a href="#evidencias" class="text-white/50 hover:text-white transition">
+                    <i class="fas fa-chevron-down text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==== 2. Sección de Evidencias ==== -->
+    <section id="evidencias" class="py-24 bg-slate-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-accent font-medium tracking-wider uppercase">Mis Trabajos</span>
+                <h2 class="text-4xl font-bold text-white mt-2 mb-4">Evidencias de Aprendizaje</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Recopilación de las actividades prácticas realizadas durante el semestre, organizadas por tópicos temáticos.</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto mt-6 rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Tópico 1: Windows -->
+                <div class="group bg-slate-900/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700 hover:border-primary/50 transition-all duration-500 card-glow">
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center flex-shrink-0 shadow-lg">
+                            <i class="fab fa-windows text-3xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-1">Tópico 1: Windows</h3>
+                            <span class="text-blue-400 text-sm font-medium">Sistema Operativo</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Aprendizaje de los <strong class="text-gray-200">fundamentos básicos de PowerShell</strong>, la potente terminal de Windows. 
+                        Exploración de comandos esenciales para la administración del sistema, navegación de directorios, 
+                        gestión de archivos y automatización de tareas básicas. Comprensión de la interfaz de línea de comandos 
+                        como herramienta fundamental para administradores de sistemas.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-xs">PowerShell</span>
+                        <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-xs">CMD</span>
+                        <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-xs">Administración</span>
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/1hz1pAmtk_R3qo_XVmk5jU_45p5cBTkXF?usp=sharing" target="_blank" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 group-hover:shadow-lg group-hover:shadow-blue-500/25">
+                        <i class="fas fa-external-link-alt"></i> Ver Evidencia
+                        <div class="line-animation"></div>
+                    </a>
+                </div>
+
+                <!-- Tópico 2: Linux -->
+                <div class="group bg-slate-900/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700 hover:border-orange-500/50 transition-all duration-500 card-glow">
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                            <i class="fab fa-linux text-3xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-1">Tópico 2: Linux</h3>
+                            <span class="text-orange-400 text-sm font-medium">Sistemas Operativos Libres</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Exploración profunda del mundo <strong class="text-gray-200">GNU/Linux</strong>. Estudio de la historia y filosofía del software libre, 
+                        instalación práctica de diversos sistemas operativos y conocimiento de las principales distribuciones: 
+                        <strong class="text-orange-300">Ubuntu, Fedora, Debian, Arch Linux, Linux Mint</strong> y más. 
+                        Comprensión de las diferencias entre distros y sus casos de uso específicos.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full text-xs">Ubuntu</span>
+                        <span class="bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full text-xs">Fedora</span>
+                        <span class="bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full text-xs">Debian</span>
+                        <span class="bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full text-xs">Distros</span>
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/1ChJ0UzpXudcAtwyYyrQH7Sqocw_aumRT?usp=sharing" target="_blank" class="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 group-hover:shadow-lg group-hover:shadow-orange-500/25">
+                        <i class="fas fa-external-link-alt"></i> Ver Evidencia
+                    </a>
+                </div>
+
+                <!-- Tópico 3: Ofimática -->
+                <div class="group bg-slate-900/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700 hover:border-green-500/50 transition-all duration-500 card-glow">
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                            <i class="fab fa-google-drive text-3xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-1">Tópico 3: Ofimática</h3>
+                            <span class="text-green-400 text-sm font-medium">Google Workspace</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Dominio de las herramientas de <strong class="text-gray-200">productividad en la nube de Google</strong>. 
+                        Trabajo colaborativo con <strong class="text-green-300">Google Docs, Sheets, Slides y Forms</strong>. 
+                        Realización de múltiples trabajos prácticos: documentos formateados, hojas de cálculo con fórmulas, 
+                        presentaciones profesionales y formularios interactivos. Aprovechamiento del trabajo en tiempo real 
+                        y almacenamiento en Google Drive.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-xs">Google Docs</span>
+                        <span class="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-xs">Sheets</span>
+                        <span class="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-xs">Slides</span>
+                        <span class="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-xs">Drive</span>
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/1FHg6UiUNZC_Fsaln_hs2B6TNuEyU4PXW?usp=sharing" target="_blank" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 group-hover:shadow-lg group-hover:shadow-green-500/25">
+                        <i class="fas fa-external-link-alt"></i> Ver Evidencia
+                    </a>
+                </div>
+
+                <!-- Tópico 4: Algoritmos -->
+                <div class="group bg-slate-900/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700 hover:border-purple-500/50 transition-all duration-500 card-glow">
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                            <i class="fas fa-code text-3xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-1">Tópico 4: Algoritmos</h3>
+                            <span class="text-purple-400 text-sm font-medium">Lógica de Programación</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Introducción a los <strong class="text-gray-200">fundamentos de la programación</strong> utilizando <strong class="text-purple-300">PSeInt</strong>. 
+                        Desarrollo de pensamiento lógico y algorítmico a nivel básico. Creación de pseudocódigo para resolver 
+                        problemas, comprensión de estructuras de control (condicionales y bucles), manejo de variables 
+                        y diseño de diagramas de flujo. Base sólida para el aprendizaje de lenguajes de programación reales.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs">PSeInt</span>
+                        <span class="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs">Pseudocódigo</span>
+                        <span class="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs">Diagramas</span>
+                        <span class="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs">Lógica</span>
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/1SbUPxbYbZmrUOjD302XitbBA2qAVJ4k9?usp=sharing" target="_blank" class="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-500/25">
+                        <i class="fas fa-external-link-alt"></i> Ver Evidencia
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==== 3. Sección "Sobre Mí" (CV) ==== -->
+    <section id="sobre-mi" class="py-24 bg-slate-900">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-accent font-medium tracking-wider uppercase">Conóceme</span>
+                <h2 class="text-4xl font-bold text-white mt-2 mb-4">Sobre Mí</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto mt-6 rounded-full"></div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Información personal -->
+                <div class="space-y-6">
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700">
+                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                            <i class="fas fa-user-graduate text-primary"></i> ¿Quién soy?
+                        </h3>
+                        <p class="text-gray-400 leading-relaxed mb-4">
+                            Mi nombre es <strong class="text-white">Angel Daniel Baez</strong>, y soy un apasionado de la tecnología 
+                            con una mente curiosa que siempre está buscando aprender algo nuevo. Desde que descubrí el mundo de la 
+                            informática, me enamoré de las infinitas posibilidades que ofrece.
+                        </p>
+                        <p class="text-gray-400 leading-relaxed">
+                            Me caracterizo por ser autodidacta, proactivo y con gran capacidad para resolver problemas. 
+                            Disfruto experimentando con nuevas tecnologías, explorando diferentes sistemas operativos 
+                            y desarrollando habilidades que me permitan crecer profesionalmente en el mundo tech.
+                        </p>
+                    </div>
+                    
+                    <!-- Habilidades -->
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700">
+                        <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                            <i class="fas fa-tools text-accent"></i> Habilidades
+                        </h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3">
+                                <i class="fab fa-windows text-blue-400 text-xl"></i>
+                                <span class="text-gray-300">Windows</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fab fa-linux text-orange-400 text-xl"></i>
+                                <span class="text-gray-300">Linux</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-terminal text-green-400 text-xl"></i>
+                                <span class="text-gray-300">PowerShell</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fab fa-google text-yellow-400 text-xl"></i>
+                                <span class="text-gray-300">Google Suite</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-project-diagram text-purple-400 text-xl"></i>
+                                <span class="text-gray-300">Algoritmos</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-lightbulb text-pink-400 text-xl"></i>
+                                <span class="text-gray-300">Resolución de problemas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CV Card -->
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-3xl"></div>
+                    <div class="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-10 border border-slate-700 text-center">
+                        <div class="w-24 h-24 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-xl">
+                            <i class="fas fa-file-alt text-4xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Currículum Vitae</h3>
+                        <p class="text-gray-400 mb-8">
+                            Consulta mi CV digital completo donde detallo mi formación académica, experiencia, 
+                            competencias técnicas y objetivos profesionales.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <a href="https://drive.google.com/file/d/1b5MJEJJMiUOf3gIWonbSy5umcMaEJ818/view?usp=sharing" 
+                               target="_blank" 
+                               class="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-primary/30">
+                                <i class="fas fa-eye"></i> Ver Currículum Completo
+                            </a>
+                            <a href="https://drive.google.com/file/d/1b5MJEJJMiUOf3gIWonbSy5umcMaEJ818/view?usp=sharing" 
+                               target="_blank" 
+                               class="w-full inline-flex items-center justify-center gap-3 bg-transparent border-2 border-slate-600 text-gray-300 hover:border-accent hover:text-accent px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300">
+                                <i class="fas fa-download"></i> Descargar PDF
+                            </a>
+                        </div>
+                        
+                        <!-- Datos rápidos -->
+                        <div class="mt-8 pt-8 border-t border-slate-700 grid grid-cols-2 gap-4 text-left">
+                            <div>
+                                <p class="text-gray-500 text-sm">Nombre</p>
+                                <p class="text-white font-medium">Angel Daniel Baez</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">Matrícula</p>
+                                <p class="text-white font-medium">100775932</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==== 4. Sección de Contacto ==== -->
+    <section id="contacto" class="py-24 bg-slate-800 relative overflow-hidden">
+        <!-- Decoración de fondo -->
+        <div class="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-accent font-medium tracking-wider uppercase">Conectemos</span>
+                <h2 class="text-4xl font-bold text-white mt-2 mb-4">Contacto</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">¿Tienes alguna pregunta o propuesta? ¡No dudes en contactarme!</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto mt-6 rounded-full"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Información de contacto -->
+                <div class="space-y-6">
+                    <div class="bg-slate-900/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 flex items-center gap-4 hover:border-primary/50 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-envelope text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-sm">Correo Electrónico</p>
+                            <a href="mailto:baezangeldaniel74@gmail.com" class="text-white font-medium hover:text-accent transition">
+                                baezangeldaniel74@gmail.com
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-900/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 flex items-center gap-4 hover:border-primary/50 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-accent to-teal-500 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-graduation-cap text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-sm">Matrícula</p>
+                            <p class="text-white font-medium">100775932</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-900/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 flex items-center gap-4 hover:border-primary/50 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-user text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-sm">Nombre Completo</p>
+                            <p class="text-white font-medium">Angel Daniel Baez</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulario de contacto -->
+                <div class="bg-slate-900/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                        <i class="fas fa-paper-plane text-accent"></i> Envíame un mensaje
+                    </h3>
+                    <form action="mailto:baezangeldaniel74@gmail.com" method="post" enctype="text/plain" class="space-y-4">
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Tu nombre</label>
+                            <input type="text" name="nombre" placeholder="Escribe tu nombre" 
+                                   class="w-full bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Tu correo</label>
+                            <input type="email" name="email" placeholder="correo@ejemplo.com" 
+                                   class="w-full bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Mensaje</label>
+                            <textarea name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." 
+                                      class="w-full bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition resize-none"></textarea>
+                        </div>
+                        <button type="submit" 
+                                class="w-full bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white px-6 py-4 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-primary/30 flex items-center justify-center gap-2">
+                            <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==== 5. Pie de Página ==== -->
+    <footer class="bg-slate-900 py-8 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <!-- Logo y créditos -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">A</span>
+                    </div>
+                    <div>
+                        <p class="text-white font-semibold">Angel Daniel Baez</p>
+                        <p class="text-gray-500 text-sm">Matrícula: 100775932</p>
+                    </div>
+                </div>
+                
+                <!-- Links rápidos -->
+                <div class="flex gap-6 text-gray-400">
+                    <a href="#inicio" class="hover:text-primary transition"><i class="fas fa-home"></i></a>
+                    <a href="#evidencias" class="hover:text-primary transition"><i class="fas fa-folder-open"></i></a>
+                    <a href="#sobre-mi" class="hover:text-primary transition"><i class="fas fa-user"></i></a>
+                    <a href="#contacto" class="hover:text-primary transition"><i class="fas fa-envelope"></i></a>
+                </div>
+                
+                <!-- Copyright -->
+                <div class="text-center md:text-right">
+                    <p class="text-gray-500 text-sm">&copy; 2025 Angel Daniel Baez</p>
+                    <p class="text-gray-600 text-xs">Portafolio Digital - Semestre 2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para el menú móvil -->
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const openIcon = document.getElementById('menu-open-icon');
+        const closeIcon = document.getElementById('menu-close-icon');
+
+        menuButton.addEventListener('click', () => {
+            // Alternar visibilidad del menú
+            mobileMenu.classList.toggle('hidden');
+            
+            // Alternar iconos
+            openIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Opcional: Cerrar menú al hacer clic en un enlace (para sitios de una página)
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                openIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>
